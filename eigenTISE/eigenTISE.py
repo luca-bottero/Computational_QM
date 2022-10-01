@@ -66,8 +66,15 @@ class TISE_1D():
         self.eigenvalues = self.eigenvalues[idxs]
         self.eigenfunctions = self.eigenfunctions[:,idxs]
 
+        # Add Ground State attributes
         self.gs_wavefunction = self.eigenfunctions[0]
         self.gs_energy = self.eigenvalues[0]
+
+        # Add Bound States attributes
+        bs_ids = np.argwhere(self.eigenvalues < 0.)
+        self.bs_wavefunctions = self.eigenfunctions[bs_ids]
+        self.bs_energies = self.eigenvalues[bs_ids]
+
 
     def _normalize_eigenfunctions(self):
         for i in range(self.eigenvalues.shape[0]):
