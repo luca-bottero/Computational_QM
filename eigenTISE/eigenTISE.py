@@ -41,11 +41,9 @@ class TISE_1D():
             self.m_e    = 1.
             #self.eps_0  = 1.
 
-
     def create_hamiltonian(self):
         self.hamiltonian = -(self.hbar**2/self.m_e)*self.lapl + sparse.diags(self.pot)
         #self.hamiltonian = sparse.csc_matrix(self.hamiltonian)
-
 
     def solve(self, real_eigs = True, method='tridiagonal', **kwargs):
         if method == 'tridiagonal':
@@ -67,6 +65,9 @@ class TISE_1D():
         idxs = np.argsort(self.eigenvalues)
         self.eigenvalues = self.eigenvalues[idxs]
         self.eigenfunctions = self.eigenfunctions[:,idxs]
+
+        self.gs_wavefunction = self.eigenfunctions[0]
+        self.gs_energy = self.eigenvalues[0]
 
     def _normalize_eigenfunctions(self):
         for i in range(self.eigenvalues.shape[0]):
