@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
+from pexpect import ExceptionPexpect
 import scipy.constants as const
 import scipy.linalg as la
 from scipy import sparse
@@ -71,17 +72,31 @@ class TISE_1D():
         self.gs_energy = self.eigenvalues[0]
 
         # Add Bound States attributes
-        bs_ids = np.argwhere(self.eigenvalues < 0.)
-        self.bs_wavefunctions = self.eigenfunctions[bs_ids]
-        self.bs_energies = self.eigenvalues[bs_ids]
+        bs_idxs = np.argwhere(self.eigenvalues < 0.)
+        self.bs_wavefunctions = self.eigenfunctions[bs_idxs]
+        self.bs_energies = self.eigenvalues[bs_idxs]
 
 
     def _normalize_eigenfunctions(self):
         for i in range(self.eigenvalues.shape[0]):
             self.eigenfunctions[:,i] /= np.sqrt(np.trapz(np.conj(self.eigenfunctions[:,i])*self.eigenfunctions[:,i], self.x))
 
-    def plot_eigenvalues(self):
-        pass
+    def plot_eigenvalues(self, n = 10, idxs = None, only_bound_states = False):
+        
+        if idxs is None:
+            if only_bound_states:
+                idxs = list(range(self.bs_energies.shape[0]))
+            else:
+                if n == 'all':
+                    n = self.eigenvalues.shape[0]
+                idxs = list(range(n))
+        
+        fig, ax = plt.subplots()
+
+        for e in self.eigenvalues[idxs]:
+            ax.hlines(y=e, xmin=4, xmax=20, linewidth=2, color='r')
+
+        return ax
 
 class TISE_1D_RADIAL(TISE_1D):
     def __init__(self, x, potential, n_eigs=1, units='SI', l=0):
