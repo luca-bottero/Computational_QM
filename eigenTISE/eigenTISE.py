@@ -62,10 +62,12 @@ class TISE_1D():
             self.eigenvalues = np.real(self.eigenvalues)
         
         self._normalize_eigenfunctions()
+
+        self.eigenfunctions = self.eigenfunctions.T
         
         idxs = np.argsort(self.eigenvalues)
         self.eigenvalues = self.eigenvalues[idxs]
-        self.eigenfunctions = self.eigenfunctions[:,idxs]
+        self.eigenfunctions = self.eigenfunctions[idxs]
 
         # Add Ground State attributes
         self.gs_wavefunction = self.eigenfunctions[0]
@@ -94,7 +96,7 @@ class TISE_1D():
         fig, ax = plt.subplots()
 
         for e in self.eigenvalues[idxs]:
-            ax.hlines(y=e, xmin=4, xmax=20, linewidth=2, color='r')
+            ax.hlines(y=e, xmin=0, xmax=1, linewidth=2, color='r')
 
         return ax
 
