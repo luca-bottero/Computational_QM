@@ -17,7 +17,7 @@ def dark_soliton(x, t, A, beta, v, x0):
     imag_part = np.imag(real_part)
     real_part = np.real(real_part)
     modulus = np.abs(real_part + 1j * imag_part)
-    return real_part, imag_part, modulus
+    return real_part, imag_part, modulus**2
 
 # Setup the figure and axis
 fig, ax = plt.subplots()
@@ -31,7 +31,7 @@ def animate(t):
     
     ax.plot(x, real_part, label='Re{$\psi(x,t)$}', color='blue')
     ax.plot(x, imag_part, label='Im{$\psi(x,t)$}', color='red')
-    ax.plot(x, modulus, label='$|\psi(x,t)|$', color='green')
+    ax.plot(x, modulus, label='$|\psi(x,t)|^2$', color='green')
 
     ax.set_xlim(-10, 10)
     ax.set_ylim(-2, 2)
@@ -51,6 +51,6 @@ if not os.path.exists('animations'):
     os.makedirs('animations')
 
 # Save the animation
-anim.save('animations/dark_soliton.gif', writer='imagemagick', fps=10)
+anim.save('animations/dark_soliton.gif', writer='imagemagick', fps=15)
 
 plt.show()

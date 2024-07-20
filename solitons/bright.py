@@ -25,7 +25,7 @@ frames = 200
 def animate(t):
     ax.clear()
     real_part, imag_part = bright_soliton(x, t, A, w_number, x0, theta0)
-    modulus = np.sqrt(real_part**2 + imag_part**2)
+    modulus = real_part**2 + imag_part**2
     
     ax.plot(x, real_part, label='Re{$\psi(x,t)$}', color='blue')
     ax.plot(x, imag_part, label='Im{$\psi(x,t)$}', color='red')
@@ -49,6 +49,6 @@ if not os.path.exists('animations'):
     os.makedirs('animations')
 
 # Save the animation
-anim.save('animations/bright_soliton.gif', writer='imagemagick', fps=10)
+anim.save('animations/bright_soliton.gif', writer='imagemagick', fps=15)
 
 plt.show()
