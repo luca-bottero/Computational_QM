@@ -20,7 +20,7 @@ def bright_soliton(x, t, A, w_number, x0, theta0):
 fig, ax = plt.subplots()
 x = np.linspace(-10, 10, 1000)
 t_max = 10
-frames = 100
+frames = 200
 
 def animate(t):
     ax.clear()
@@ -42,7 +42,7 @@ def animate(t):
     return ax
 
 # Create the animation
-anim = animation.FuncAnimation(fig, animate, frames=np.linspace(0, t_max, frames), interval=100, repeat=True)
+anim = animation.FuncAnimation(fig, animate, frames=np.linspace(0, t_max, frames), interval=25, repeat=True)
 
 # Ensure the animations directory exists
 if not os.path.exists('animations'):
