@@ -30,7 +30,7 @@ def animate(t):
     ax.plot(x, modulus, label='$|\psi(x,t)|^2$', color='green')
 
     ax.set_xlim(-10, 10)
-    ax.set_ylim(-3.5, 3.5)
+    ax.set_ylim(-3.5, 5.5)
     
     ax.set_title(f'Peregrine Soliton\nTime [a.u.]= {t:.2f}', fontsize=20)
     ax.set_xlabel('x [a.u.]', fontsize=18)

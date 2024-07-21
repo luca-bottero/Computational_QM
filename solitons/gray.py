@@ -5,7 +5,7 @@ import os
 
 # Parameters for the gray Soliton
 n_0 = 1.
-v = 0.
+v = 0.75
 v_1 = 3.
 xi = 1.5
 
@@ -54,7 +54,6 @@ anim.save('animations/gray_soliton.gif', writer='imagemagick', fps=15)
 
 plt.show()
 
-
 # Setup the figure and axis for 3D animation
 fig3d = plt.figure()
 ax3d = fig3d.add_subplot(111, projection='3d')
@@ -62,7 +61,7 @@ ax3d = fig3d.add_subplot(111, projection='3d')
 def animate_3d(t):
     ax3d.clear()
     re, img, _ = gray_soliton(x, t)
-    wavefunction = re + 1j*img
+    wavefunction = re + 1j*img    
     magnitude = np.abs(wavefunction)
     phase = np.angle(wavefunction)
     
@@ -83,6 +82,6 @@ def animate_3d(t):
 anim3d = animation.FuncAnimation(fig3d, animate_3d, frames=np.linspace(0, t_max, frames), interval=25, repeat=True)
 
 # Save the 3D animation
-anim3d.save('animations/wavefunction_3d.gif', writer='imagemagick', fps=15)
+anim3d.save('animations/gray_soliton_3d.gif', writer='imagemagick', fps=15)
 
 plt.show()

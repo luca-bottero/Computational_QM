@@ -14,7 +14,7 @@ def kuznetsov_ma_breather(x, t):
     xi = 2*b*(b**0.5 - s**0.5)
 
     numerator = 2*(b**2 - s**2)*np.cos(xi*t) + 1j*xi*np.sin(xi*t)
-    denominator = b*np.cosh(x*xi/b) - s*np.cos(xi*t)
+    denominator = b*np.cosh(2*x*(b**2-s**2)**0.5) - s*np.cos(xi*t)
     psi = (s - numerator/denominator) * np.exp(1j*s**2*t) 
 
     return np.real(psi), np.imag(psi), np.abs(psi)**2
